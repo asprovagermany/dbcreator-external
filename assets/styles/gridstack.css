@@ -1,0 +1,127 @@
+/* CSS für das Gridstack-Layout und die darin liegenden Widgets*/
+.grid-stack {
+  background: var(--secondaryColor); /* Hintergrundfarbe des Gridstacks*/
+  top: 70px;
+}
+.grid-stack-item-content {
+  background-color: #fff;
+  box-shadow: 0px 1px 22px -12px #607d8b; /* Fügt einen Schatten um die Widgets herum hinzu*/
+  border-radius: 10px; /* Abrundung der Widgets */
+  overflow-y: hidden !important;
+}
+
+.grid-stack-item-content h3 {
+  margin-left: 15px;
+}
+
+.widget {
+  flex: 1 0 calc(50% - 20px); /* 50% width with some margin */
+  margin: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+
+/* X-Button in der oberen rechten Ecke eines Widgets, um dieses zu löschen*/
+.delete-widget {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 25px;
+  color: var(--iconsColor);
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+/* Stift Button in der oberen rechten Ecke eines Widgets, links neben X-Button, um das Widget zu editieren*/
+.edit-widget {
+  cursor: pointer;
+  position: absolute;
+  top: 13px;
+  right: 45px;
+  font-size: 20px;
+  color: var(--iconsColor);
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+/* offenes Schloss Button in der oberen rechten Ecke eines Widget. Widget-Status: unfixiert. Buttonklick dient zum fixieren des Widget*/
+.lock-widget {
+  cursor: pointer;
+  position: absolute;
+  top: 13px;
+  right: 77px;
+  font-size: 20px;
+  color: var(--iconsColor);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: block;
+}
+
+/* geschlossenes Schloss Button in der oberen rechten Ecke eines Widget. Widget-Status: fixiert. Buttonklick dient zum Lösen der FIxierung des Widget*/
+.unlock-widget {
+  cursor: pointer;
+  position: absolute;
+  top: 13px;
+  right: 82px;
+  font-size: 20px;
+  color: var(--iconsColor);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: none;
+}
+
+/* Resize-Symbole für Widgets */
+.grid-stack-item .ui-resizable-handle-top-left {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  z-index: 10;
+  cursor: se-resize;
+  top: 0; /* Position oben */
+  left: 0; /* Position links */
+}
+
+.grid-stack-item .ui-resizable-handle-top-right {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  z-index: 10;
+  cursor: se-resize;
+  top: 0; /* Position oben */
+  right: 0; /* Position rechts */
+}
+
+.grid-stack-item .ui-resizable-handle-bottom-left {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  z-index: 10;
+  cursor: se-resize;
+  bottom: 0; /* Position unten */
+  left: 0; /* Position links */
+}
+
+.grid-stack-item .ui-resizable-handle-bottom-right {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  z-index: 10;
+  cursor: se-resize;
+  bottom: 0; /* Position unten */
+  right: 0; /* Position rechts */
+}

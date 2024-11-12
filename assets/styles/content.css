@@ -1,0 +1,168 @@
+/* CSS für den Content Bereich, Stilbuttons, Anpassungsbuttons 
+*/
+
+#content {
+  padding-top: 100px; /* Oberer Rand mit Größe des headers */
+  padding-left: 74px; /* Linker Rand mit Größe der nav-bar */
+  background-color: var(
+    --secondaryColor
+  ); /*Hintergrundfarbe des äußeren Bereiches der content area*/
+}
+
+/* Container, welcher stylebar, Scrollbuttons und add Style button beinhaltet */
+.stylebar-container-wrapper {
+  position: fixed;
+  overflow: hidden; /* Scrollbar wird versteckt, ist aber vorhanden*/
+  display: flex; /* Flexbox verwenden */
+  align-items: center; /* Vertikal zentrieren */
+  z-index: 8500;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.stylebar-container,
+.button-container-vertical {
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.stylebar-container {
+  max-width: calc(
+    100vw - 300px
+  ); /* Größe der Buttonleiste füllt horizontal alles mögliche der content-area aus*/
+  flex-wrap: nowrap; /* Damit die Buttons nicht umbrechen */
+  white-space: nowrap; /* Damit die Buttons in einer Linie bleiben */
+  transition: transform 0.3s ease; /* Sanfte Animation beim Scrollen */
+  scroll-behavior: smooth; /* Sanftes Scrollen */
+  overflow-x: auto; /* Horizontales Scrollen aktivieren */
+  padding-right: 0px;
+}
+
+/* Verstecke den Scrollbalken, da wir unser eigenes Scrollen implementieren */
+.stylebar-container::-webkit-scrollbar {
+  display: none;
+}
+
+.button-container-vertical {
+  position: fixed;
+  top: 150px; /* Anpassen der vertikalen Positionierung */
+  right: 5px;
+  display: flex; /* Standardmäßig eingeblendet */
+  flex-direction: column; /* Vertikales Layout */
+  gap: 10px; /* Abstand zwischen den Elementen */
+  transition: opacity 0.5s; /* Animationsübergang */
+}
+
+.button-container-vertical.visible {
+  display: flex;
+}
+
+.style-adjust-button {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.show {
+  opacity: 1; /* Einblenden des Containers */
+}
+
+.add-style-button,
+#adjustVisibility,
+#scroll-button-right,
+#scroll-button-left {
+  background-color: var(--primaryColor); /* alt: #fff*/
+  color: var(--fontColor);
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 3px 5px 0px #607d8b; /* Fügt einen Schatten um die Buttons hinzu*/
+  border-radius: 10px; /* Abrundung der Buttons */
+  position: relative; /* Platzieren Sie den Tooltip relativ zum Button */
+}
+
+#scroll-button-right,
+#scroll-button-left {
+  margin-left: 10px;
+  margin-top: 8px;
+  /*padding: 5px; /* Verkleinert die breite der buttons -> scrollLeft + 40 müsste angepasst werden*/
+}
+
+/* Klasse für die Button in der vertikalen Menüleiste am rechten Rand der Content-Area */
+.style-adjust-button {
+  background-color: var(--primaryColor);
+  color: var(--fontColor);
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: -3px 0px 15px 0px #607d8b; /* etwas stärkerer Schatten-Effekt auf der linken Seite des Buttons*/
+  border-radius: 10px; /* Abrundung der Buttons */
+  position: relative; /* Platzieren Sie den Tooltip relativ zum Button */
+}
+
+.style-adjust-button i {
+  font-size: 20px;
+  color: var(--iconsColor);
+}
+
+.add-style-button i,
+#scroll-button-right i,
+#scroll-button-left i {
+  font-size: 15px;
+  color: var(--iconsColor);
+}
+
+.add-style-button {
+  margin-right: 3px;
+  margin-left: 5px;
+  margin-top: 8px;
+  z-index: 9998;
+}
+
+/* Anpassung der Stil Buttons */
+.style-button {
+  background-color: var(--primaryColor);
+  color: var(--fontColor);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 3px 5px 0px #607d8b; /* Fügt einen Schatten um die Buttons hinzu*/
+  border-radius: 10px; /* Abrundung der Buttons */
+  max-height: 35px;
+  white-space: nowrap; /* Kein Zeilenumbruch in der Schrift auf den Buttons */
+
+  visibility: visible;
+  padding: 10px;
+  margin-right: 10px;
+  width: auto;
+}
+
+/* Button in der Content-Area oben rechts zum ein- und ausklappen der vertikalen Buttonleiste*/
+#adjustVisibility {
+  top: 119px;
+  width: 40px;
+  height: 40px;
+  position: fixed; /* Positionierung absolut, um es unabhängig vom Fluss des Dokuments zu positionieren */
+  right: 5px; /* Rechts ausgerichtet */
+  color: var(--iconsColor);
+  box-shadow: -3px 0px 15px 0px #607d8b; /* etwas stärkerer Schatten-Effekt auf der linken Seite des Buttons*/
+  z-index: 800;
+}
+
+#adjustVisibility i {
+  font-size: 20px;
+}
+
+.hidden {
+  display: none !important;
+}

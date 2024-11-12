@@ -1,0 +1,70 @@
+/* CSS für die nav-bar an der linken Seite
+*/
+
+#nav-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+  height: calc(100% - 102px);
+  min-height: calc(100% - 102px);
+  z-index: 500; /* kleiner als Modal, größer als header */
+  top: 102px;
+  left: 0;
+  background-color: var(--primaryColor);
+  border-right: 1px solid #ccc; /* Rahmen nur auf der rechten Seite */
+  box-shadow: 3px 0px 5px -3px #607d8b; /* Angepasster Schatteneffekt */
+}
+
+#nav-bar ul {
+  list-style: none;
+  padding: 0;
+}
+#nav-bar-bottom {
+  margin-top: auto; /* Platzhalter, um das untere Menü nach unten zu verschieben */
+}
+#nav-bar li {
+  padding: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc; /* Graue Trennlinie zwischen Menüpunkten*/
+}
+/* Eigenschaften für die Bilder in der Nav-Bar (Asprova-Logo unten) */
+#nav-bar li img {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+/* Eigenschaften für die FontAwesome Icons in der Nav-Bar */
+#nav-bar li i {
+  font-size: 30px;
+  margin-left: 5px;
+  vertical-align: middle;
+  color: var(--iconsColor);
+  cursor: pointer;
+}
+
+/*  CSS-Übergangseffekte für ein und Ausblenden der Nav-bar */
+
+@keyframes slideIn {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    height: auto;
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}

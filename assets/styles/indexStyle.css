@@ -1,0 +1,84 @@
+/* CSS für das Frontend, welche nicht in andere CSS-Datein ausgelagert wurden
+*/
+
+body {
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  font-family: "Barlow", Arial, sans-serif;
+  margin: 0;
+  background-color: var(
+    --secondaryColor
+  ); /* Hintergrundfarbe des äußeren Bereiches der content area */
+  font-size: 1.2rem;
+}
+
+input,
+select {
+  font-size: 16px;
+}
+
+/* Tooltips */
+
+/* Verstecke standardmäßig die Tooltips */
+[data-tooltip-left]::after,
+[data-tooltip-right]::after,
+[data-tooltip-left-top]::after,
+[data-tooltip-right-top]::after {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 9999;
+  font-size: 12px;
+  white-space: nowrap;
+  border: 1px solid #ccc;
+}
+
+/* Tooltip, welcher nach links verschoben ist*/
+[data-tooltip-left]::after {
+  content: attr(data-tooltip-left);
+  left: calc(-100% - 11px); /* Verschiebe den Tooltip nach links */
+}
+/* Tooltip, welcher nach rechts wächst und nicht verschoben ist*/
+[data-tooltip-right]::after {
+  content: attr(data-tooltip-right);
+}
+/* Tooltip, welcher weit nach links und nach oben verschoben ist */
+[data-tooltip-left-top]::after {
+  content: attr(data-tooltip-left-top);
+  left: calc(-100% - 65px); /* Verschiebe den Tooltip weit nach links */
+  top: -10px; /* Verschiebe den Tooltip nach oben */
+}
+
+/* Tooltip, welcher nach rechts und nach oben verschoben ist */
+/* Wird gebraucht bei nav-bar-visibility button */
+[data-tooltip-right-top]::after {
+  content: attr(data-tooltip-right-top);
+  top: -10px; /* Verschiebe den Tooltip nach oben */
+}
+
+/* Zeige den Tooltip, wenn über den Button gehovert wird */
+[data-tooltip-left]:hover::after,
+[data-tooltip-right]:hover::after,
+[data-tooltip-left-top]:hover::after,
+[data-tooltip-right-top]:hover::after {
+  display: block;
+}
+
+/* CSS Stil für das Nachrichten Pop-up in der rechten unteren Ecke*/
+.popup {
+  position: fixed;
+  bottom: 50px; /* Standardabstand vom unteren Rand */
+  right: 20px; /* Standardabstand vom rechten Rand */
+  background-color: var(--primaryColor); /* alt #f1f1f1*/
+  color: var(--titleColor);
+  padding: 10px;
+  border-radius: 5px;
+  display: none; /* Anfangs unsichtbar */
+  z-index: 990; /* Z-Index erhöhen, um über anderen Inhalten zu liegen */
+  transition: bottom 0.5s ease; /* Übergangseffekt für die Position */
+  box-shadow: 0px 5px 40px -16px #607d8b; /* Schatten */
+}

@@ -1,0 +1,31 @@
+/** CSS-Datei, welche die CSS-Variablen beinhaltet  
+**/
+@media print {
+  body {
+    max-height: 100vh;
+    overflow-y: visible !important;
+    float: none !important;
+  }
+
+  #header,
+  #adjust-visibility,
+  #button-container-vertical,
+  #stylebar-container,
+  #popup,
+  #nav-bar {
+    display: none !important;
+  }
+
+  .stylebar-container-wrapper {
+    display: none !important;
+  }
+
+  #contentPrint {
+    position: static !important;
+  }
+
+  .grid-stack-item {
+    overflow: visible !important;
+    page-break-inside: avoid;
+  }
+}

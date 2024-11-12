@@ -1,0 +1,65 @@
+/* CSS für den header (oberen Bereich)
+*/
+
+#header {
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100px;
+  background-color: var(--primaryColor);
+  align-items: center;
+  justify-content: space-between; /* Text zentral ausrichten */
+  z-index: 499; /* kleiner als Modal */
+  border: 1px solid #ccc; /* dünnen Rahmen hinzufügen */
+  box-shadow: 0px 1px 22px -12px #607d8b; /* Schatteneffekt hinzufügen */
+}
+
+#header-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Titel hat links fixen Startpunkt und wächst nach rechts */
+  color: var(--titleColor);
+  font-size: 30px;
+  height: 100%;
+  position: relative; /* Positionierung relativ, um das Positionieren von nav-bar-visibility zu erleichtern */
+}
+
+/* Linker Container im Header, beinhaltet den Titel und Button zum Ein-/Ausklappen der nav-bar */
+#header-title {
+  margin-left: 70px; /* extra Abstand damit header title nicht zu dicht an button für nav-bar kommt*/
+}
+
+/* Rechter Container im Header, beinhaltet das Logo*/
+#header-image {
+  flex: 0 0 30%; /* 30% der Breite, nicht wachsen oder schrumpfen */
+  display: flex;
+  justify-content: flex-end; /* Rechts ausrichten */
+  align-items: center; /* Vertikal zentrieren */
+  height: 100%;
+  margin-right: 30px; /* Abstand von 5% auf der rechten Seite */
+  white-space: nowrap; /* Verhindert Zeilenumbruch */
+}
+
+#header-image img {
+  max-height: 80%;
+  max-width: 100%;
+}
+
+/* Button zum Anpassen der Sichtbarkeit der nav-bar*/
+#nav-bar-visibility {
+  width: 35px;
+  height: 35px;
+  position: absolute; /* Positionierung absolut, um es unabhängig vom Fluss des Dokuments zu positionieren */
+  bottom: 0; /* Unten ausgerichtet */
+  left: 0; /* Links ausgerichtet */
+  color: var(--iconsColor);
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-left: 0px;
+  border-bottom: 0px;
+  background-color: var(--primaryColor);
+  cursor: pointer;
+}

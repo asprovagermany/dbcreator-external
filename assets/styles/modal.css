@@ -1,0 +1,136 @@
+/*CSS für allgemeine Regeln der Modals 
+1. "Neues Widget hinzufügen"
+2. "Widget Editieren" 
+3. "Neuen Stil erstellen" / "Stil editieren"
+4. "Settings" 
+*/
+
+/* Stil für das Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99998;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.modal {
+  display: none; /* Standardmäßig ausgeblendet */
+  position: fixed;
+  z-index: 99999; /* hohe z-Index, um das Modal über anderen Inhalten anzuzeigen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+
+  overflow: auto;
+  /*background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+  animation: slideIn 0.5s ease-in-out;
+}
+
+.modal-content {
+  background-color: #fefefe; /* Weißer Hintergrund für das Modal */
+  margin: 20% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: auto;
+  max-width: 800px; /* Maximalbreite des Modals */
+  border-radius: 10px; /* Abrundung des Modals */
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(-50%, -70%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.close {
+  color: var(--iconsColor);
+  background-color: transparent;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+}
+
+.selectData {
+  display: flex;
+}
+
+.property > select {
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.abs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.abs > h3 {
+  font-size: auto;
+  margin: 0;
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+.fullHeight {
+  height: calc(100% - (1.3rem + 72px));
+}
+
+#wrapperSchedOptions {
+  display: block;
+  margin-top: 25px;
+  border-top: 1px solid #888;
+  padding-top: 25px;
+}
+
+#wrapperSchedChild {
+  display: flex;
+  justify-content: space-between;
+}
+
+#modalWidgetFilter {
+  width: calc(100% - 130px);
+  background-color: white;
+}
+
+#filterSchedRun {
+  margin-top: 8px;
+}

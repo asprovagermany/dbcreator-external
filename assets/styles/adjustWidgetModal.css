@@ -1,0 +1,104 @@
+#adjustWidgetModal,
+#settingsWidgetModal {
+  min-width: 80vw;
+}
+
+#adjustWidgetModal {
+  overflow-y: hidden;
+}
+
+.modal-content label {
+  min-width: 130px;
+}
+
+#filterSchedRun,
+#upToDate {
+  display: flex;
+}
+
+div > select,
+div > input {
+  min-width: 250px;
+}
+
+#modalStaticWidgetupToDate,
+#modalStaticWidgetNumOfEvals {
+  min-width: 0px;
+}
+
+.modal-content > div {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+
+#widgetSize {
+  margin-top: 3px !important;
+  justify-content: space-between;
+}
+
+.selectData > div {
+  display: flex;
+}
+
+.selectData {
+  margin-bottom: 5px;
+}
+
+.modal-content select,
+input {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom-width: 1px;
+}
+
+#wrapperSelection i {
+  margin-left: 5px;
+}
+
+#headerRow {
+  display: block !important;
+  margin-top: 0 !important;
+}
+
+#wrapperSelection {
+  flex-wrap: wrap;
+}
+
+#modalStaticWidgetNumOfEvals,
+#modalWidgetHeight,
+#modalWidgetWidth {
+  max-width: 40px;
+}
+
+#modalConfirm {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalConfirm > button {
+  min-width: 200px;
+  min-height: 25px;
+  border-radius: 5px;
+  background-color: var(--iconsColor);
+  color: #fff;
+  border: none;
+}
+
+#styleSettingsButtons {
+  display: flex;
+  margin-top: 20px;
+}
+
+#styleSettingsButtons > button {
+  margin: 5px;
+  min-width: 150px;
+  min-height: 25px;
+  border-radius: 5px;
+  background-color: var(--iconsColor);
+  color: #fff;
+  border: none;
+}

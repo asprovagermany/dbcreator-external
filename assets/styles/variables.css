@@ -1,0 +1,9 @@
+/** CSS-Datei, welche die CSS-Variablen beinhaltet  
+**/
+:root {
+  --primaryColor: #efeff2;
+  --secondaryColor: #eff4f7;
+  --iconsColor: #3db39e;
+  --fontColor: #000000;
+  --titleColor: #000000;
+}

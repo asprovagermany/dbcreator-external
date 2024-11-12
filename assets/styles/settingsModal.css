@@ -1,0 +1,123 @@
+/* CSS-Regeln für das Settings Modal*/
+
+label[for="infoActiveColorscheme"] {
+  font-weight: bold;
+  color: var(--iconsColor);
+}
+
+label[for="warningActiveColorScheme"] {
+  font-weight: bold;
+  color: red;
+}
+
+#modalSettingsHeader,
+#modalSettingsImage {
+  position: relative;
+}
+
+#colorPickerWindow {
+  size: 0px !important;
+  height: 0px !important;
+  width: 0px !important;
+  border: none !important;
+  padding: 0px !important;
+  color: transparent;
+  background-color: transparent;
+  padding-block: 0px;
+  padding-inline: 0px;
+}
+
+#modalSettingsImage {
+  border-radius: 5px;
+  min-height: 25px;
+  background-color: var(--iconsColor);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.settingsModalColorContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Container auf 100% der Breite setzen */
+}
+
+.settingsModalColorContainer label {
+  flex: 1; /* Jedes Label nimmt gleichmäßig Platz ein */
+  text-align: center; /* Text in jedem Label zentrieren */
+}
+
+.settingsModalColorContainer button {
+  border-radius: 5px;
+  min-height: 25px;
+  background-color: var(--iconsColor);
+  color: #fff;
+  border: none;
+}
+
+.settingsModalColors {
+  flex: 1; /* Jedes Icon nimmt gleichmäßig Platz ein */
+  display: flex;
+  justify-content: center; /* Icons horizontal zentrieren */
+  align-items: center; /* Icons vertikal zentrieren */
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.settingsModalColors i {
+  font-size: 55px;
+  box-shadow: 0px 1px 22px -12px #607d8b;
+  cursor: pointer;
+  background-color: transparent !important;
+  border-radius: 50%; /* Runde Ecken für kreisförmige Icons */
+}
+
+.schemebuttons {
+  flex: 1; /* Jeder Button nimmt gleichmäßig Platz ein */
+  display: flex;
+  justify-content: center; /* Buttons horizontal zentrieren */
+  align-items: center; /* Buttons vertikal zentrieren */
+  background-color: transparent;
+  border: none !important;
+  cursor: pointer;
+}
+
+.schemebuttons i {
+  font-size: 55px;
+  color: black;
+}
+
+.saveDisabled,
+.saveCustom {
+  flex: 1; /* Jeder Button nimmt gleichmäßig Platz ein */
+  display: flex;
+  justify-content: center; /* Buttons horizontal zentrieren */
+  align-items: center; /* Buttons vertikal zentrieren */
+  cursor: pointer;
+}
+
+.saveDisabled {
+  visibility: hidden; /* Verstecke unsichtbare Buttons */
+}
+
+.saveCustom {
+  visibility: visible; /* Zeige sichtbare Buttons */
+}
+
+#modalSettingsConfirm {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalSettingsConfirm > button {
+  min-width: 200px;
+  min-height: 25px;
+  border-radius: 5px;
+  background-color: var(--iconsColor);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

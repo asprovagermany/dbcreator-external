@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Widgets mit Charts Beispiel</title>
+    <!-- Einbindung von ApexCharts -->
+    <script src="node_modules/apexcharts/dist/apexcharts.min.js"></script>
+    <link rel="stylesheet" href="node_modules/apexcharts/dist/apexcharts.css" />
+
+    <!-- Einbindung von Gridstack -->
+    <script src="node_modules/gridstack/dist/gridstack-all.js"></script>
+    <link
+      href="node_modules/gridstack/dist/gridstack.min.css"
+      rel="stylesheet"
+    />
+
+    <!--Einbinden von TreeselectJS-->
+    <script src="node_modules/treeselectjs/dist/treeselectjs.umd.js"></script>
+    <link rel="stylesheet" href="./assets/styles/treeselectjs.css" />
+    <script src="./assets/optionstree.js" defer></script>
+
+    <!-- Einbindung von Fontawesome für Icons -->
+    <link
+      rel="stylesheet"
+      href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+
+    <!-- Einbinden von Custom Logiken-->
+    <script src="assets/indexGs.js"></script>
+    <script src="assets/adjustWidgetModal.js"></script>
+    <script src="assets/widgetButtons.js"></script>
+    <script src="assets/eventListener.js"></script>
+    <script src="assets/localStorage.js"></script>
+
+    <script src="assets/main.js"></script>
+    <script src="assets/popUpMessage.js"></script>
+    <script src="assets/settings.js"></script>
+    <script src="assets/styleLogic.js"></script>
+
+    <!-- Einbinden von Custom Logiken-->
+    <script src="assets/utils/lang.js"></script>
+
+    <script src="assets/charts/asprovaConnector.js"></script>
+    <script src="assets/charts/modalHelpers.js" defer></script>
+    <script src="assets/charts/charttypes.js"></script>
+    <script src="assets/charts/MinMaxScaler.js"></script>
+    <script src="assets/charts/utils.js"></script>
+
+    <title class="titleSite">Dashboard Creator</title>
+
+    <!-- Einbindung von CSS Stylesheets-->
+    <link rel="stylesheet" href="assets/styles/content.css" />
+    <link rel="stylesheet" href="assets/styles/gridstack.css" />
+    <link rel="stylesheet" href="assets/styles/header.css" />
+    <link rel="stylesheet" href="assets/styles/indexStyle.css" />
+    <link rel="stylesheet" href="assets/styles/modal.css" />
+    <link rel="stylesheet" href="assets/styles/nav-bar.css" />
+    <link rel="stylesheet" href="assets/styles/variables.css" />
+    <link rel="stylesheet" href="assets/styles/adjustWidgetModal.css" />
+    <link rel="stylesheet" href="assets/styles/print.css" />
+    <link rel="stylesheet" href="assets/styles/widgetSettingsModal.css" />
+    <link rel="stylesheet" href="assets/styles/settingsModal.css" />
+    
+  </head>
+
+  <body>
+    <div id="header">
+      <div id="header-text">
+        <!--
+      <button id="nav-bar-visibility" data-tooltip-right-top="ein- /ausblenden" class="navBarVisibilityHover"
+        onclick="changeNavbarVisibility()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      -->
+        <span id="header-title">Default Header Title</span>
+      </div>
+      <div id="header-image">
+        <img
+          id="headerImageValue"
+          src="assets/images/headerImage.png"
+          alt="Header Image"
+        />
+      </div>
+    </div>
+    <!--
+  <div id="nav-bar" style="display:none">
+    <ul id="nav-bar-top">
+      <li data-tooltip-right="Dashboard" class="homeHover" onclick="openHome()">
+        <i class="fa-solid fa-house"></i>
+      </li>
+      <li data-tooltip-right="Beispiel Dashboards" class="exampleHover" onclick="openSample()">
+        <i class="fa-solid fa-chart-bar"></i>
+      </li>
+      <li data-tooltip-right="Seite neuladen" class="reloadHover" onclick="reloadPage()">
+        <i class="fa-solid fa-rotate"></i>
+      </li>
+      <li data-tooltip-right="Daten importieren" class="importHover" onclick="uploadGlobalData()">
+        <i class="fa-solid fa-download"></i>
+
+      </li>
+      <li data-tooltip-right="Daten exportieren" class="exportHover" onclick="uploadGlobalData()">
+        <i class="fas fa-upload"></i>
+      </li>
+    </ul>
+    <ul id="nav-bar-bottom">
+      <li data-tooltip-right="Einstellungen" class="settingsHover" onclick="openSettingsModal()">
+        <i class="fa-solid fa-gear"></i>
+      </li>
+      <li>
+        <img src="assets/images/AsprovaWoosh.png" alt="Icon" />
+      </li>
+    </ul>
+  </div>
+    -->
+    <div id="content" style="padding-left: 0px">
+      <div class="stylebar-container-wrapper">
+        <button
+          class="scroll-buttons"
+          id="scroll-button-left"
+          onclick="scrollL()"
+        >
+          <i class="fa-solid fa-caret-left"></i>
+        </button>
+
+        <div class="stylebar-container" id="stylebar-container"></div>
+
+        <button class="add-style-button" onclick="addStyleButton()">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <button
+          class="scroll-buttons"
+          id="scroll-button-right"
+          onclick="scrollR()"
+        >
+          <i class="fa-solid fa-caret-right"></i>
+        </button>
+      </div>
+
+      <button
+        id="adjustVisibility"
+        class="adjustVisibilityHover"
+        data-tooltip-left="ein- /ausblenden"
+        onclick="changeAdjustVisibility()"
+      >
+        <i class="fa-solid fa-sliders"></i>
+      </button>
+
+      <div
+        id="button-container-vertical"
+        class="button-container-vertical"
+        style="opacity: 0; z-index: -1"
+      >
+        <!-- "show in der Klasse hinzugefügt, damit ein und ausblenden durch Funktion changeAdjustVisibility() direkt funktioniert"-->
+
+        <!-- Button zum Hinzufügen eines neuen Widgets im Gridstack -->
+        <button
+          class="style-adjust-button addWidgetHover"
+          id="add-widget"
+          data-tooltip-left="Widget hinzufügen"
+          onclick="addWidgetButton()"
+        >
+          <i class="fa-solid fa-folder-plus"></i>
+        </button>
+        <!-- Button zum Speichern von Stilen -->
+        <button
+          class="style-adjust-button saveStyleHover"
+          id="save-style"
+          data-tooltip-left="Stil speichern"
+          onclick="saveStyle()"
+        >
+          <i class="fa-solid fa-floppy-disk"></i>
+        </button>
+        <!-- Button zum Laden von Stilen -->
+        <button
+          class="style-adjust-button loadStyleHover"
+          id="load-style"
+          data-tooltip-left="Stil laden"
+          onclick="loadData(globalThis.activeStyle)"
+        >
+          <i class="fa-solid fa-spinner"></i>
+        </button>
+        <!-- Button zum Umbenennen von Stilen -->
+        <button
+          class="style-adjust-button renameStyleHover"
+          id="rename-style"
+          data-tooltip-left="Stil umbenennen"
+          onclick="openStyleModal('umbenennen',null)"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <!-- Button zum Leeren des Gridstack -->
+        <button
+          class="style-adjust-button clearStyleHover"
+          id="clear-window"
+          data-tooltip-left="Stil leeren"
+          onclick="clearWindow()"
+        >
+          <i class="fa-solid fa-eraser"></i>
+        </button>
+        <button
+          class="style-adjust-button deleteStyleHover"
+          id="delete-style"
+          data-tooltip-left="Stil löschen"
+          onclick="deleteStyle()"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </button>
+        <!-- Button without function
+      <button class="style-adjust-button pdfHover" id="pdf" data-tooltip-left="Als PDF speichern" onclick="printPage()">
+        <i class="fa-solid fa-file-pdf"></i>
+      </button>
+      <button data-tooltip-left="Daten exportieren" class="style-adjust-button exportHover"
+        onclick="uploadGlobalData()">
+        <i class="fas fa-upload"></i>
+      </button>
+      -->
+        <button
+          data-tooltip-left="Einstellungen"
+          class="style-adjust-button settingsHover"
+          onclick="openSettingsModal()"
+        >
+          <i class="fa-solid fa-gear"></i
+          ><!-- Settings -->
+        </button>
+      </div>
+
+      <div id="contentPrint" class="grid-stack"></div>
+    </div>
+    <!-- Modal für das Widget hinzufügen -->
+    <div id="modalWidgetOverlay" class="modal-overlay">
+      <div id="adjustWidgetModal" class="modal">
+        <div class="modal-content">
+          <div id="headerRow">
+            <span
+              class="close"
+              onclick="closeWidgetModal(), addHidden(NumOfEvals, Ressource), resetSelectValues()"
+              ><i class="fa-solid fa-xmark"></i
+            ></span>
+            <h2 class="newWidget">Hinzufügen eines Neuen Widgets</h2>
+          </div>
+          <div id="widgetName">
+            <label for="modalStaticWidgetTitle" class="titelWidget"
+              >Titel:
+            </label>
+            <input
+              type="text"
+              id="modalWidgetTitle"
+              placeholder="Widget-Titel"
+            />
+            <br />
+          </div>
+          <div id="diagramType">
+            <label for="modalStaticWidgetSelectChart" class="chartType"
+              >Diagramm Typ:
+            </label>
+            <select name="chartType" id="chartType" onchange="">
+              <option value="" disabled selected class="optionPlaceholder">
+                Select your option
+              </option>
+            </select>
+            <br />
+          </div>
+          <div id="wrapperSelection">
+            <div id="selectData" class="selectData">
+              <div id="selectTable">
+                <label for="modalStaticWidgetSelectTable" class="table"
+                  >Tabelle:
+                </label>
+                <select
+                  onchange="getProperties(table.value)"
+                  name="table"
+                  id="table"
+                  class="tableSelect"
+                >
+                  <option value="" disabled selected class="optionPlaceholder">
+                    Select your option
+                  </option>
+                </select>
+              </div>
+              <div id="selectKPIs" class="property">
+                <select
+                  name="property"
+                  id="property"
+                  class="property"
+                  onchange="removeHidden(addButton, wrapperSchedOptions)"
+                >
+                  <option value="" disabled selected class="optionPlaceholder">
+                    Select your option
+                  </option>
+                </select>
+                <i
+                  class="fa-solid fa-plus hidden"
+                  id="addButton"
+                  onclick="addKPIselect(), generateTableSelect ()"
+                ></i>
+              </div>
+            </div>
+          </div>
+          <div id="Ressource" class="hidden">
+            <br />
+            <label for="modalStaticWidgetRessource" class="resource"
+              >Ressource:
+            </label>
+            <select name="resource" id="resourceSelect" class="resourceSelect">
+              <option value="" disabled selected class="optionPlaceholder">
+                Select your option
+              </option>
+            </select>
+          </div>
+          <div id="wrapperSchedOptions" class="hidden">
+            <div id="wrapperSchedChild">
+              <div id="upToDate">
+                <label for="modalStaticWidgetupToDate" class="upToDate"
+                  >Aktuell halten?</label
+                >
+                <input
+                  type="checkbox"
+                  id="modalStaticWidgetupToDate"
+                  checked
+                  onchange="helperEventSchedUpToDate()"
+                />
+              </div>
+              <div id="NumOfEvals" class="hidden">
+                <label for="modalStaticWidgetNumOfEvals" class="numOfEval"
+                  >Anzahl der Planungsläufe</label
+                >
+                <input
+                  type="number"
+                  id="modalStaticWidgetNumOfEvals"
+                  value="1"
+                  placeholder="1"
+                  min="1"
+                />
+              </div>
+            </div>
+            <div id="filterSchedRun">
+              <label for="modalStaticWidgetTitle" class="filterWidget"
+                >Filter:</label
+              >
+              <input
+                type="text"
+                id="modalWidgetFilter"
+                placeholder="ME.Code=='Lorem Ipsum'"
+              />
+            </div>
+          </div>
+          <div id="selectSchedRun" class="hidden"></div>
+          <div id="widgetSize" class="hidden">
+            <div>
+              <label for="modalStaticWidgetWidth" class="width"
+                >Breite (max. 12):</label
+              >
+              <input
+                type="number"
+                id="modalWidgetWidth"
+                value="6"
+                min="1"
+                max="12"
+              />
+              <span id="widthError" class="error-message"></span>
+            </div>
+            <div>
+              <label for="modalStaticWidgetHeight" class="height"
+                >Höhe (max. 12):</label
+              >
+              <input
+                type="number"
+                id="modalWidgetHeight"
+                value="6"
+                min="1"
+                max="12"
+              />
+              <span id="heightError" class="error-message"></span>
+            </div>
+            <br />
+          </div>
+          <div id="modalConfirm">
+            <button
+              id="modalConfirmButton"
+              class="confirm"
+              onclick="saveCombination(), confirmWidgetModal(), resetSelectValues()"
+            >
+              Bestätigen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal für Widget Settings -->
+    <div id="modalSettingsWidgetOverlay" class="modal-overlay">
+      <div id="settingsWidgetModal" class="modal">
+        <div class="modal-content">
+          <div id="headerRow">
+            <span class="close" onclick="closeWidgetSettingsModal()"
+              ><i class="fa-solid fa-xmark"></i>
+            </span>
+            <h2 class="editWidgetTitle">Editieren des Widgets</h2>
+          </div>
+          <div class="wrapperSettings">
+            <div>
+              <label for="modalStaticWidgetTitle" class="titelWidget"
+                >Titel:
+              </label>
+              <input type="text" id="modalWidgetTitle" />
+            </div>
+            <div class="horizontal">
+              <label class="horizontalWidget"> Horizontal: </label>
+              <label class="switch">
+                <input type="checkbox" onchange="doalert(this)" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div>
+              <label class="normalizeWidget"> Normalisieren: </label>
+              <label class="switch">
+                <input id="normalizeSlider" type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <br />
+          <div id="modalConfirm">
+            <button
+              id="modalConfirmButton"
+              class="confirm"
+              onclick="confirmWidgetSettingsModal(editingWidgetId)"
+            >
+              Bestätigen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal für das Bearbeiten von Stilen hinzufügen -->
+    <div id="modalStyleOverlay" class="modal-overlay">
+      <div id="adjustStyleModal" class="modal">
+        <div class="modal-content">
+          <button
+            type="button"
+            class="close"
+            onclick="closeStyleModal('forcedExit')"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <h2 class="editStyleTitle">Stil umbenennen</h2>
+          <label for="modalStaticStyleTitle" class="editStyleName">
+            Neuer Stilname:</label
+          >
+          <input
+            type="text"
+            id="modalStyleTitle"
+            placeholder="Stil-Titel"
+          /><span id="styleTitleError" class="error-message"></span><br />
+          <div id="styleSettingsButtons">
+            <button
+              id="styleModalConfirmAndSaveButton"
+              onclick="confirmStyleModal('Save')"
+              class="saveAndConfirm"
+            >
+              Speichern und Bestätigen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal für das Bearbeiten der Settings hinzufügen -->
+    <div id="modalSettingsOverlay" class="modal-overlay">
+      <div id="adjustSettingsModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="cancelSettingsModal()"
+            ><i class="fa-solid fa-xmark"></i
+          ></span>
+          <h2 class="settingsTitle">Einstellungen</h2>
+          <label for="modalStaticSettingsHeader" class="titleLabel">
+            Festlegen des Titels im Header:</label
+          >
+          <input
+            type="text"
+            id="modalSettingsHeader"
+            placeholder="Header Text"
+          />
+          <span id="settingsHeaderError" class="error-message"></span><br />
+          <br />
+          <label for="modalStaticSettingsImage" class="imgLabel">
+            Festlegen des Bildes im Header:
+          </label>
+          <button
+            id="modalSettingsImage"
+            onclick="chooseImageforHeader()"
+            class="buttonImage"
+          >
+            Bilddatei auswählen
+          </button>
+          <span id="settingsImageError" class="error-message"></span
+          ><br /><br />
+          <label for="modalStaticSettingsLayoutInfo" class="currentColorscheme">
+            Aktuelles Farbschema
+          </label>
+          <label for="infoActiveColorscheme" class="infoActiveColorscheme">
+          </label>
+          <label
+            for="warningActiveColorScheme"
+            class="warningActiveColorScheme"
+          ></label
+          ><br /><br />
+
+          <div class="settingsModalColorContainer">
+            <label for="modalStaticSettingsPrimary" class="primaryLabel">
+              Primär
+            </label>
+            <label for="modalStaticSettingsSecondary" class="secondaryLabel">
+              Sekundär
+            </label>
+            <label for="modalStaticSettingsIcons" class="symbolLabel">
+              Symbole
+            </label>
+            <label for="modalStaticSettingsFont" class="fontLabel">
+              Schrift
+            </label>
+            <label for="modalStaticSettingsTitle" class="titleLabel">
+              Titel
+            </label>
+          </div>
+          <br />
+
+          <input
+            type="color"
+            id="colorPickerWindow"
+            class="color-input"
+            onchange="setColor(globalThis.activeColorButton)"
+            style="display: block"
+          />
+          <div class="settingsModalColorContainer">
+            <button
+              id="settingsModalPrimaryColor"
+              class="settingsModalColors"
+              onclick="openColorPicker(id)"
+            >
+              <i class="fa-solid fa-circle"></i>
+            </button>
+            <button
+              id="settingsModalSecondaryColor"
+              class="settingsModalColors"
+              onclick="openColorPicker(id)"
+            >
+              <i class="fa-solid fa-circle"></i>
+            </button>
+            <button
+              id="settingsModalIconsColor"
+              class="settingsModalColors"
+              onclick="openColorPicker(id)"
+            >
+              <i class="fa-solid fa-circle"></i>
+            </button>
+            <button
+              id="settingsModalFontColor"
+              class="settingsModalColors"
+              onclick="openColorPicker(id)"
+            >
+              <i class="fa-solid fa-circle"></i>
+            </button>
+            <button
+              id="settingsModalTitleColor"
+              class="settingsModalColors"
+              onclick="openColorPicker(id)"
+            >
+              <i class="fa-solid fa-circle"></i>
+            </button>
+          </div>
+          <br />
+
+          <div class="settingsModalColorContainer">
+            <label id="modalSettingsPrimaryValue"> X </label>
+            <label id="modalSettingsSecondaryValue"> X </label>
+            <label id="modalSettingsIconsValue"> X </label>
+            <label id="modalSettingsFontValue"> X </label>
+            <label id="modalSettingsTitleValue"> X </label>
+          </div>
+          <br />
+          <br />
+
+          <label for="modalStaticSettingsSchemeInfo" class="paletteLabel">
+            Farbpaletten - tippe auf das Symbol, um die Palette auszuwählen
+          </label>
+          <br />
+          <br />
+          <div class="settingsModalColorContainer">
+            <label for="modalStaticSettingsScheme1" class="scheme1Label">
+              Light Mode
+            </label>
+            <label for="modalStaticSettingsScheme2" class="scheme2Label">
+              Dark Mode
+            </label>
+            <label for="modalStaticSettingsScheme3" class="scheme3Label">
+              Custom 1
+            </label>
+            <label for="modalStaticSettingsScheme4" class="scheme4Label">
+              Custom 2
+            </label>
+            <label for="modalStaticSettingsScheme5" class="scheme5Label">
+              Custom 3
+            </label>
+          </div>
+          <div class="settingsModalColorContainer">
+            <button
+              id="buttonScheme1"
+              class="schemebuttons"
+              onclick="loadScheme(0)"
+            >
+              <i class="fa-regular fa-sun"></i>
+            </button>
+
+            <button
+              id="buttonScheme2"
+              class="schemebuttons"
+              onclick="loadScheme(1)"
+            >
+              <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button
+              id="buttonScheme3"
+              class="schemebuttons"
+              onclick="loadScheme(2)"
+            >
+              <i class="fa-solid fa-droplet-slash"></i>
+            </button>
+
+            <button
+              id="buttonScheme4"
+              class="schemebuttons"
+              onclick="loadScheme(3)"
+            >
+              <i class="fa-solid fa-droplet-slash"></i>
+            </button>
+            <button
+              id="buttonScheme5"
+              class="schemebuttons"
+              onclick="loadScheme(4)"
+            >
+              <i class="fa-solid fa-droplet-slash"></i>
+            </button>
+          </div>
+          <br />
+          <div class="settingsModalColorContainer">
+            <button
+              id="saveDisabledLM"
+              class="saveDisabled"
+              style="visibility: hidden"
+            >
+              Speichern
+            </button>
+            <button
+              id="saveDisabledDM"
+              class="saveDisabled"
+              style="visibility: hidden"
+            >
+              Speichern
+            </button>
+
+            <button
+              id="saveCustom1"
+              class="saveCustom save"
+              onclick="updateCustomPalette(2)"
+            >
+              Speichern
+            </button>
+            <button
+              id="saveCustom2"
+              class="saveCustom save"
+              onclick="updateCustomPalette(3)"
+            >
+              Speichern
+            </button>
+            <button
+              id="saveCustom3"
+              class="saveCustom save"
+              onclick="updateCustomPalette(4)"
+            >
+              Speichern
+            </button>
+          </div>
+          <br />
+          <br />
+
+          <div id="modalSettingsConfirm">
+            <button
+              id="settingsModalConfirmButton"
+              onclick="confirmSettingsModal()"
+              class="confirm"
+            >
+              Bestätigen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pop-up Element -->
+    <div id="popup" class="popup"></div>
+  </body>
+  <script>
+    let diagramSelection = document.getElementById("chartType");
+    let propSelection = document.getElementById("property");
+    const re = /User_Res/;
+
+    document.getElementById("modalStaticWidgetNumOfEvals").value = 1;
+    diagramSelection.addEventListener("change", function () {
+      if (
+        diagramSelection.value === "line" ||
+        diagramSelection.value === "bar" ||
+        diagramSelection.value === "horizontalbar" ||
+        diagramSelection.value === "radar"
+      ) {
+        removeHidden(NumOfEvals, addButton);
+      } else {
+        addHidden(NumOfEvals, addButton);
+      }
+    });
+
+    propSelection.addEventListener("change", function () {
+      if (propSelection.value.match(re)) {
+        removeHidden(Ressource);
+        getRessources();
+      } else {
+        console.log(propSelection.value);
+        addHidden(Ressource);
+      }
+    });
+
+    function helperEventSchedUpToDate() {
+      let schedUpToDate = document.getElementById("modalStaticWidgetupToDate");
+      let numOfEval = document.getElementById("modalStaticWidgetNumOfEvals");
+      let filter = document.getElementById("modalWidgetFilter");
+      let tree = document.getElementById("selectSchedRun");
+
+      if (schedUpToDate.checked) {
+        tree.innerHTML = "";
+        addHidden(selectSchedRun);
+        removeHidden(NumOfEvals, filterSchedRun);
+        if (
+          (diagramSelection.value === "line" ||
+            diagramSelection.value === "bar" ||
+            diagramSelection.value === "horizontalbar" ||
+            diagramSelection.value === "radar")
+        ) {
+          removeHidden(NumOfEvals);
+        } else {
+          addHidden(NumOfEvals);
+        }
+      } else {
+        filter.value = "";
+        numOfEval.value = 1;
+        removeHidden(selectSchedRun);
+        addHidden(NumOfEvals, filterSchedRun);
+        if (
+          (diagramSelection.value === "line" ||
+            diagramSelection.value === "bar" ||
+            diagramSelection.value === "horizontalbar" ||
+            diagramSelection.value === "radar")
+        ) {
+          generateTreeSelect(false);
+        } else {
+          generateTreeSelect(true);
+        }
+      }
+    }
+    function doalert(checkboxElem) {
+      if (checkboxElem.checked) {
+        altert("hi");
+      } else {
+        alert("bye");
+      }
+    }
+  </script>
+</html>
