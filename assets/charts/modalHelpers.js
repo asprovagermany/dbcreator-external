@@ -56,6 +56,20 @@ let iValuesGraphTypeLang = [
       { id: "radar", text: "Schemat pajęczyny" },
     ],
   },
+  {
+    fr_FR_0: [
+      { id: "abs", text: "Nombre absolu" },
+      { id: "radialBar", text: "Barres radiales" },
+      { id: "gauge", text: "Demi-cercle" },
+      { id: "pie", text: "Graphique à secteurs" },
+      { id: "donut", text: "Graphique Donut" },
+      { id: "line", text: "Graphique linéaire" },
+      { id: "bar", text: "Graphique à barres - verticales" },
+      { id: "horizontalbar", text: "Graphique à barres - horizontales" },
+      { id: "radar", text: "Graphique radar" },
+    ],
+  }
+
 ];
 
 let iValuesTablesLang = [
@@ -83,6 +97,12 @@ let iValuesTablesLang = [
       { id: "SchedEvalResult", text: "Ocena planu" },
     ],
   },
+  {
+    fr_FR_0: [
+      { id: "KPIEvalResult", text: "Résultats financiers" },
+      { id: "SchedEvalResult", text: "Évaluation de l'ordonnancement" },
+    ],
+  }
 ];
 
 let iValuesGraphType = Object.values(
