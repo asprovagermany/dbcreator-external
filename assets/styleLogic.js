@@ -85,8 +85,10 @@ function styleButtonLoadTitle(button, styleData) {
 
 // Funktion zum Laden der gespeicherten Stilbuttons beim Start der Seite
 function loadSavedStyleButtons() {
-  for (let i = 1; i <= globalStyleCounter; i++) {
-    const savedData = localStorage.getItem("savedData" + i);
+  let styleBarContainer = document.getElementById("stylebar-container");
+  styleBarContainer.innerHTML = '';
+  for (let i = 1; i <= project.RootObject.PropertyValueCount(project,propIDstyleData); i++) {
+    const savedData = project.GetAsStr(propIDstyleData,i);
     if (savedData !== null) {
       const data = JSON.parse(savedData);
       addStyleButtonFromSave(i, data.styleTitle);
@@ -115,7 +117,7 @@ function addStyleButtonFromSave(idNumber, stylename) {
 // Funktion, welche den gespeicherten Stil mit dem geringsten Index findet und dessen Nummer zurückgibt
 function getFirstStyleNumber() {
   for (let i = 1; i <= globalStyleCounter; i++) {
-    const savedData = localStorage.getItem("savedData" + i);
+    const savedData = project.GetAsStr(propIDstyleData,i);
     if (savedData !== null) {
       return i;
     }
@@ -131,7 +133,7 @@ function getClosestStyleNumber() {
   let closestHigherStyleNumber = null;
 
   for (let i = 1; i <= globalStyleCounter; i++) {
-    const savedData = localStorage.getItem("savedData" + i);
+    const savedData = project.GetAsStr(propIDstyleData,i);
     if (savedData !== null) {
       if (i <= globalThis.activeStyle) {
         if (
@@ -244,10 +246,12 @@ function getActiveStyleButton() {
 
 // Funktion, welche den aktuell ausgewählten Stil aus dem LocalStorage und entfernt und den button aus dem DOM-Baum entfernt
 function deleteStyle() {
-  console.log(globalThis.activeStyle);
   if (globalThis.activeStyle !== null) {
-    localStorage.removeItem("savedData" + globalThis.activeStyle);
+
+    project.SetAsStr(propIDstyleData, globalThis.activeStyle,'');
     popupRemoved();
+    adjustSavedStyleNumber(globalThis.activeStyle);
+
 
     const styleBarContainer = document.getElementById("stylebar-container");
     const buttonToRemove = document.getElementById(
@@ -258,6 +262,7 @@ function deleteStyle() {
       styleBarContainer.removeChild(buttonToRemove);
       checkScroll();
     }
+    loadSavedStyleButtons()
   } else {
     popupNoStyleToDelete();
     return;
@@ -271,6 +276,21 @@ function deleteStyle() {
     globalThis.activeStyleName = null;
     popupNoStyleAvailable();
   }
+}
+
+function adjustSavedStyleNumber(activeStyle) {
+  let styleCount = project.RootObject.PropertyValueCount(project,propIDstyleData);
+  let deletedStyle = activeStyle;
+
+  for (let i = 1; i <= styleCount; i++) {
+    let currentStyleData = JSON.parse(project.GetAsStr(propIDstyleData,i));
+    currentStyleData.styleNumber > deletedStyle ? currentStyleData.styleNumber = currentStyleData.styleNumber-1:false;
+    project.SetAsStr(propIDstyleData,i,JSON.stringify(currentStyleData))
+  }
+  let globalData = JSON.parse(project.GetAsStr(propIDglobalData,1));
+  globalData.globalStyleCounter = project.RootObject.PropertyValueCount(project,propIDstyleData);
+  project.SetAsStr(propIDglobalData,1,JSON.stringify(globalData));
+  globalThis.globalStyleCounter = project.RootObject.PropertyValueCount(project,propIDstyleData);
 }
 
 // Code für das Stil Modal

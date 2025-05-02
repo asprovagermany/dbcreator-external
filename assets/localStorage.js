@@ -3,7 +3,7 @@
 // Funktion zum Überprüfen, ob es schon gespeicherte Daten für das Dashboard im Localstorage gibt
 // Lädt einen Teil der gespeicherten Daten in die Oberfläche
 // TODO: ggf. Aufteilung der Funktion, sodass Laden der Daten in anderer Funktion gemacht wird
-function checkLocalStorage() {
+/*function checkLocalStorage() {
   //Prüfen, ob schon globale Dashboarddaten im LocalStorage vohanden sind
   if (localStorage.getItem("globalDashboardData") !== null) {
     // Globale Daten wurden gefunden
@@ -26,6 +26,28 @@ function checkLocalStorage() {
     return false;
   }
 }
+*/
+
+const propIDglobalData = project.RootObject.LookUpPropID("GlobalDashboardCreatorData");
+const propIDstyleData = project.RootObject.LookUpPropID("DashboardCreatorStyleData");
+
+function checkAsprovaStorageGlobalData() {
+  let globalData = project.GetAsStr(propIDglobalData,1);
+  if(globalData !== '') {
+    console.log('Asprova Global Dashboard Daten sind vorhanden')
+    const data = JSON.parse(globalData);
+      globalThis.globalWidgetCounter = data.globalWidgetCounter;
+      globalThis.globalStyleCounter = data.globalStyleCounter;
+      document.getElementById("header-title").textContent = data.headerTitle;
+      document.getElementById("headerImageValue").src = data.headerImage;
+      popupLocalStorageLoaded();
+    return true;
+  }  else {
+    console.log('Asprova Daten sind leer, initialisiere Dashboard')
+    return false
+  }
+}
+
 
 // Funktion, die ausgeführt wird, wenn initial das Item GlobalDashboardData angelegt wird
 function initialGLobalDashboardData() {
@@ -100,16 +122,17 @@ function initialGLobalDashboardData() {
   }
 
   // Speichern der Daten im LocalStorage im Format einer JSON Datei
-  localStorage.setItem(
+  /*localStorage.setItem(
     "globalDashboardData",
     JSON.stringify(globalDashboardData)
-  );
+  ); */
+  project.SetAsStr(propIDglobalData,1,JSON.stringify(globalDashboardData));
 }
 
 // Funktion, die ausgeführt wird, wenn das Item "GlobalDashboardData" im Local Storage aktualisiert wird
 function updateGlobalDashboardData(info) {
   // Zuweisen des aktuellen Werts von globalDashboardData (falls vorhanden)
-  var currentValue = localStorage.getItem("globalDashboardData");
+  var currentValue = project.GetAsStr(propIDglobalData,1);
   var globalDashboardData = JSON.parse(currentValue);
 
   // Daten aus dem SettingsModal werden aktualisiert
@@ -144,16 +167,19 @@ function updateGlobalDashboardData(info) {
   }
 
   // Speichern der Daten im LocalStorage im JSON-Format
+  /*
   localStorage.setItem(
     "globalDashboardData",
     JSON.stringify(globalDashboardData)
-  );
+  );*/
+
+  project.SetAsStr(propIDglobalData,1,JSON.stringify(globalDashboardData));
 }
 
 // Funktion zum Laden der gespeicherten Stile und Widget-Informationen
 function loadData(styleNumber) {
   clearWindow();
-  const savedData = localStorage.getItem("savedData" + styleNumber);
+  const savedData = project.GetAsStr(propIDstyleData,styleNumber);
   if (savedData) {
     const data = JSON.parse(savedData);
 
@@ -208,10 +234,13 @@ function saveStyle() {
     styleTitle: getActiveStyleButton().textContent,
     widgets: widgetData,
   };
+  /*
   localStorage.setItem(
     "savedData" + globalThis.activeStyle,
     JSON.stringify(data)
   );
+  */
+  project.SetAsStr(propIDstyleData,globalThis.activeStyle,JSON.stringify(data))
 
   updateGlobalDashboardData("gridstack");
   popupSaved();
@@ -219,10 +248,9 @@ function saveStyle() {
 
 // Funktion zum Laden eines Stils
 function loadStyle(styleNumber) {
-  const itemName = "savedData" + styleNumber;
   clearWindow();
   //Prüfen, ob schon Daten im LocalStorage zu dem jeweiligen Stil existieren
-  if (localStorage.getItem(itemName) !== null) {
+  if (project.GetAsStr(propIDstyleData,styleNumber) !== null) {
     // falls ja, dann werden diese in den Gridstack geladen
     loadData(styleNumber);
   } else {

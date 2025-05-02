@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
   globalThis.globalWidgetCounter = 0; // Zählt die globale Anzahl von Widgets, um Doppeldeutigkeiten zu vermeiden
   globalThis.globalStyleCounter = 0; // Zählt die globale Anzahl von Stilen, um Doppeldeutigkeiten zu vermeiden
 
-  globalThis.dataAvailable = checkLocalStorage(); // Prüfe, ob es schon gespeicherte Daten gibt
-
+  globalThis.dataAvailable = checkAsprovaStorageGlobalData(); // Prüfe, ob es schon gespeicherte Daten gibt
+  
   globalThis.activeStyle = 0; // Aktuell aktiver Stil
   globalThis.activeStyleName = ""; // Name des aktiven Stils
   globalThis.activeColorButton = 0;

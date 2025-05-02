@@ -248,7 +248,7 @@ function confirmWidgetSettingsModal(widgetId) {
   widget.querySelector("h3").textContent = title;
   const slider = document.getElementById("normalizeSlider");
   if (slider.checked) {
-    let style = JSON.parse(localStorage.getItem("savedData" + activeStyle));
+    let style = JSON.parse(project.GetAsStr(propIDstyleData,globalThis.activeStyle));
     let currentWidget = style.widgets.find(
       (item) => item.id === editingWidgetId
     );
@@ -286,7 +286,7 @@ function confirmWidgetSettingsModal(widgetId) {
       widget.setAttribute("data", JSON.stringify(newData));
     }
   } else {
-    let style = JSON.parse(localStorage.getItem("savedData" + activeStyle));
+    let style = JSON.parse(project.GetAsStr(propIDstyleData,globalThis.activeStyle));
     let currentWidget = style.widgets.find(
       (item) => item.id === editingWidgetId
     );
@@ -397,4 +397,5 @@ function confirmWidgetModal() {
   }
   // Schließe das Modal
   closeWidgetModal();
+  saveStyle();
 }

@@ -31,7 +31,7 @@
     <script src="assets/adjustWidgetModal.js"></script>
     <script src="assets/widgetButtons.js"></script>
     <script src="assets/eventListener.js"></script>
-    <script src="assets/localStorage.js"></script>
+
 
     <script src="assets/main.js"></script>
     <script src="assets/popUpMessage.js"></script>
@@ -46,7 +46,7 @@
     <script src="assets/charts/charttypes.js"></script>
     <script src="assets/charts/MinMaxScaler.js"></script>
     <script src="assets/charts/utils.js"></script>
-
+    <script src="assets/localStorage.js"></script>
     <title class="titleSite">Dashboard Creator</title>
 
     <!-- Einbindung von CSS Stylesheets-->
@@ -769,6 +769,7 @@
         }
       }
     }
+    window.dispatchEvent(new Event('resize'));
     function doalert(checkboxElem) {
       if (checkboxElem.checked) {
         altert("hi");

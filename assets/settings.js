@@ -114,7 +114,7 @@ function chooseImageforHeader() {
 
 // Funktion, welche aus dem LocalStorage das gespeicherte Bild zurückgibt
 function getSavedHeaderImage() {
-  const savedData = localStorage.getItem("globalDashboardData");
+  const savedData = project.GetAsStr(propIDglobalData,1);
   const data = JSON.parse(savedData);
   return data.headerImage;
 }
@@ -153,7 +153,7 @@ function loadIconColors() {
 // Funktion, welche vor dem Anzeigen des Settingsmodals und beim Überschrieben von Custom Paletten prüft, welche Custom Paletten gespeicherte Daten haben
 // Die Buttons Custom-Paletten ohne gespeicherte Daten werden deaktiviert und das Icon ist durchgestrichen
 function checkPaletteAvailability() {
-  const savedData = localStorage.getItem("globalDashboardData");
+  const savedData = project.GetAsStr(propIDglobalData,1);
   const data = JSON.parse(savedData);
   var palettesArray = data.palettes;
   const empty = "null"; // Initial haben die Custom-Paletten in ihren Farbwerten "null" stehen
@@ -188,7 +188,7 @@ function checkPaletteAvailability() {
 
 // Funktion, welche vor dem Anzeigen des Settingsmodal prüft, ob das aktuelle Farbschema eines der gespeicherten ist
 function checkActivePalette(startNumber) {
-  const savedData = localStorage.getItem("globalDashboardData");
+  const savedData = project.GetAsStr(propIDglobalData,1);
   const data = JSON.parse(savedData);
   var palettesArray = data.palettes;
 
@@ -282,7 +282,7 @@ function checkSimilarColors(element) {
 
 // Funktion, welche die im LocalStorage gespeicherten aktiven Farbwerte in die globalen variablen lädt
 function getStorageColorProperties() {
-  const savedData = localStorage.getItem("globalDashboardData");
+  const savedData = project.GetAsStr(propIDglobalData,1);
   const data = JSON.parse(savedData);
   globalThis.PrimaryC = data.PrimaryColor;
   globalThis.SecondaryC = data.SecondaryColor;
@@ -294,7 +294,7 @@ function getStorageColorProperties() {
 
 // Funktion, welche die im LocalStorage gespeicherten oder initialisierten Paletten in globale Variablen lädt
 function getStorageCustomPalettes() {
-  const savedData = localStorage.getItem("globalDashboardData");
+  const savedData = project.GetAsStr(propIDglobalData,1);
   const data = JSON.parse(savedData);
   var palettesArray = data.palettes;
   globalThis.Custom1 = palettesArray[2];
@@ -378,7 +378,7 @@ function getPaletteNumberFromId(buttonId) {
 // Bei Dark Mode & Light Mode die Farbwerte aus dem Local Storage geladen
 // Bei den 3 Custom Paletten werden die Farbwerte aus den globalen Variablen geladen
 function loadScheme(number) {
-  var savedData = localStorage.getItem("globalDashboardData");
+  var savedData = project.GetAsStr(propIDglobalData,1);
   var data = JSON.parse(savedData);
   var palettesArray = data.palettes;
 

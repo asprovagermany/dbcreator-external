@@ -51,7 +51,7 @@ function editWidget(widgetId) {
   const widget = document.getElementById(widgetId);
   const widgetTitle = widget.querySelector("h3").textContent;
   const slider = document.getElementById("normalizeSlider");
-  let style = JSON.parse(localStorage.getItem("savedData" + activeStyle));
+  let style = JSON.parse(project.GetAsStr(propIDstyleData,globalThis.activeStyle));
   let currentWidget = style.widgets.find((item) => item.id === widgetId);
   let widgetData = JSON.parse(currentWidget.chartData);
   if (widgetData[0].normalize) {

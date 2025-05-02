@@ -1,5 +1,31 @@
 const asprova = window.chrome.webview.hostObjects.sync.asprova;
 const project = asprova.ActiveProject;
+
+const GLOBAL_DC_DATA = "GlobalDashboardCreatorData";
+const STYLE_DC_DATA = "DashboardCreatorStyleData";
+
+const kSystemInfo = 14336;
+const kValueTypeSymbol = 8;
+const projectClassDef = project.rootObject.LookupClassDefFromCode("Project");
+
+function CreatePropertyDef( code, classDef, valType, alias, description, multidata )
+{
+    let propDef = project.rootObject.LookupPropertyDefFromCode( code );
+    if( propDef ) return propDef.PropertyID;
+
+    propDef = project.CreateUserPropertyDefWithoutAddingToStyles( classDef, code, valType, multidata );
+
+    propDef.descriptionString = description;
+    propDef.alias = alias;
+
+    project.rootMessage.AddMsg( kSystemInfo, "Added property " + alias );
+
+    return propDef.PropertyID;
+}
+
+CreatePropertyDef( GLOBAL_DC_DATA, projectClassDef, kValueTypeSymbol, "General DashboardCreator Data", "General informations", false);
+CreatePropertyDef( STYLE_DC_DATA, projectClassDef, kValueTypeSymbol, "DashboardCreator Saved Styles", "Informations about each style", true );
+
 let x = 1;
 let y = 1;
 const propIDnegativeKPI = project.RootObject.LookUpPropID(

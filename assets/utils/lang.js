@@ -455,3 +455,106 @@ const languages = [
 		},
 		}		
 ];
+
+//Current possible Graph Types
+const iValuesGraphTypeLang = [
+	{
+	  jpn: [
+		{ id: "abs", text: "絶対数" },
+		{ id: "radialBar", text: "ラジアルバー" },
+		{ id: "gauge", text: "セミサークル" },
+		{ id: "pie", text: "円グラフ" },
+		{ id: "donut", text: "ドーナツ図" },
+		{ id: "line", text: "線図" },
+		{ id: "bar", text: "棒グラフ - 垂直" },
+		{ id: "horizontalbar", text: "棒グラフ - 水平" },
+		{ id: "radar", text: "蜘蛛の巣の図" },
+	  ],
+	},
+	{
+	  de_DE_0: [
+		{ id: "abs", text: "Absolute Zahl" },
+		{ id: "radialBar", text: "Radial Bar" },
+		{ id: "gauge", text: "Halbkreis" },
+		{ id: "pie", text: "Torten-Diagramm" },
+		{ id: "donut", text: "Donut Diagramm" },
+		{ id: "line", text: "Linien Diagramm" },
+		{ id: "bar", text: "Balken Diagramm - vertikal" },
+		{ id: "horizontalbar", text: "Balken Diagramm - horizontal" },
+		{ id: "radar", text: "Spinnennetz-Diagramm" },
+	  ],
+	},
+	{
+	  en_US_0: [
+		{ id: "abs", text: "Absolute number" },
+		{ id: "radialBar", text: "Radial bar" },
+		{ id: "gauge", text: "Semicircle" },
+		{ id: "pie", text: "Pie chart" },
+		{ id: "donut", text: "Donut chart" },
+		{ id: "line", text: "Line chart" },
+		{ id: "bar", text: "Bar chart - vertical" },
+		{ id: "horizontalbar", text: "Bar chart - horizontal" },
+		{ id: "radar", text: "Radar chart" },
+	  ],
+	},
+	{
+	  pl_PL_0: [
+		{ id: "abs", text: "Liczba bezwzględna" },
+		{ id: "radialBar", text: "Drążek promieniowy" },
+		{ id: "gauge", text: "Półkole" },
+		{ id: "pie", text: "Wykres kołowy" },
+		{ id: "donut", text: "Schemat pączka" },
+		{ id: "line", text: "Wykres liniowy" },
+		{ id: "bar", text: "Wykres słupkowy - pionowy" },
+		{ id: "horizontalbar", text: "Wykres słupkowy - poziomy" },
+		{ id: "radar", text: "Schemat pajęczyny" },
+	  ],
+	},
+	{
+	  fr_FR_0: [
+		{ id: "abs", text: "Nombre absolu" },
+		{ id: "radialBar", text: "Barres radiales" },
+		{ id: "gauge", text: "Demi-cercle" },
+		{ id: "pie", text: "Graphique à secteurs" },
+		{ id: "donut", text: "Graphique Donut" },
+		{ id: "line", text: "Graphique linéaire" },
+		{ id: "bar", text: "Graphique à barres - verticales" },
+		{ id: "horizontalbar", text: "Graphique à barres - horizontales" },
+		{ id: "radar", text: "Graphique radar" },
+	  ],
+	}
+  
+  ];
+  
+  const iValuesTablesLang = [
+	{
+	  jpn: [
+		{ id: "KPIEvalResult", text: "金銭的KPI" },
+		{ id: "SchedEvalResult", text: "プラン評価" },
+	  ],
+	},
+	{
+	  de_DE_0: [
+		{ id: "KPIEvalResult", text: "Monetäre KPIs" },
+		{ id: "SchedEvalResult", text: "Planbewertung" },
+	  ],
+	},
+	{
+	  en_US_0: [
+		{ id: "KPIEvalResult", text: "Monetary KPIs" },
+		{ id: "SchedEvalResult", text: "Schedule Evaluation" },
+	  ],
+	},
+	{
+	  pl_PL_0: [
+		{ id: "KPIEvalResult", text: "Pieniężne KPI" },
+		{ id: "SchedEvalResult", text: "Ocena planu" },
+	  ],
+	},
+	{
+	  fr_FR_0: [
+		{ id: "KPIEvalResult", text: "Résultats financiers" },
+		{ id: "SchedEvalResult", text: "Évaluation de l'ordonnancement" },
+	  ],
+	}
+  ];
