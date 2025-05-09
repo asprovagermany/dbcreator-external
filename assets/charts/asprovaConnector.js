@@ -26,6 +26,12 @@ function CreatePropertyDef( code, classDef, valType, alias, description, multida
 CreatePropertyDef( GLOBAL_DC_DATA, projectClassDef, kValueTypeSymbol, "General DashboardCreator Data", "General informations", false);
 CreatePropertyDef( STYLE_DC_DATA, projectClassDef, kValueTypeSymbol, "DashboardCreator Saved Styles", "Informations about each style", true );
 
+propIDGLOBAL_DC_DATA = project.RootObject.LookUpPropID(GLOBAL_DC_DATA)
+propIDSTYLE_DC_DATA = project.RootObject.LookUpPropID(STYLE_DC_DATA)
+
+project.FindChild("ClassDef").FindChild("Project").FindChild(GLOBAL_DC_DATA).ReadOnlyForUserPropertyDef = true
+project.FindChild("ClassDef").FindChild("Project").FindChild(STYLE_DC_DATA).ReadOnlyForUserPropertyDef = true
+
 let x = 1;
 let y = 1;
 const propIDnegativeKPI = project.RootObject.LookUpPropID(
