@@ -130,9 +130,9 @@ Copyright © 2025 **Asprova GmbH**
 ## Third-Party Notices
 
 This project uses third-party libraries under their respective licenses, including but not limited to:
-- [ApexCharts]      (MIT)
-- [GridStack]       (MIT)
-- [TreeselectJS]    (MIT)
+- [ApexCharts]      
+- [GridStack]       
+- [TreeselectJS]    
 - [Font Awesome]
 
 Refer to each library’s repository for the full license text.
